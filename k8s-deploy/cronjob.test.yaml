@@ -1,0 +1,52 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: pyladies-amsterdam-etl-test
+  namespace: pyladies-amsterdam-etl
+spec:
+  # At 08:00 GMT
+  schedule: "0 8 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      template:
+        spec:
+          restartPolicy: OnFailure
+          securityContext:
+            runAsUser: 65534
+            runAsGroup: 65534
+            fsGroup: 65534
+          containers:
+          - name: pyladies-amsterdam-etl
+            image: eu.gcr.io/nimellaa-test/pyladies-amsterdam-etl:latest
+            imagePullPolicy: Always
+            args: ["python3", "-m", "src.main"]
+            envFrom:
+              - configMapRef:
+                  name: pyladies-amsterdam-etl-config-test
+              - secretRef:
+                  name: pyladies-amsterdam-etl-secrets
+            volumeMounts:
+              - name: storage-config-volume
+                mountPath: /src/keys/gcp_storage_key.json
+                subPath: gcp_storage_key.json
+                readOnly: true
+              - name: bigquery-config-volume
+                mountPath: /src/keys/gcp_bigquery_key.json
+                subPath: gcp_bigquery_key.json
+                readOnly: true
+              - name: raw-data-config-volume
+                mountPath: /src/keys/gcp_raw_data_key.json
+                subPath: gcp_raw_data_key.json
+                readOnly: true
+          volumes:
+            - name: storage-config-volume
+              secret:
+                secretName: pyladies-amsterdam-etl-secrets
+            - name: bigquery-config-volume
+              secret:
+                secretName: pyladies-amsterdam-etl-secrets
+            - name: raw-data-config-volume
+              secret:
+                secretName: pyladies-amsterdam-etl-secrets

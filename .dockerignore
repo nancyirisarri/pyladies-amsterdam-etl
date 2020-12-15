@@ -1,0 +1,17 @@
+.dockerignore
+.git
+.gitignore
+.idea
+data/
+docker-local/
+docs/
+k8s-deploy/
+models/
+notebooks/
+references/
+reports/
+tests/
+Dockerfile
+environment.yml
+githubrequirements.txt
+README.md

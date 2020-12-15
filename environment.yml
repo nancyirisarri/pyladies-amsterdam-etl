@@ -1,0 +1,18 @@
+name: pyladies-amsterdam-etl
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.9
+  - NumPy
+  - SciPy
+  - matplotlib
+  - seaborn
+  - pandas
+  - Sphinx
+  - pip
+  - pip:
+    - -rgithubrequirements.txt
+
