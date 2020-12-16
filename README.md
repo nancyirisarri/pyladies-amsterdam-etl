@@ -3,7 +3,7 @@ PyLadies Amsterdam ETL Repository
 
 Repository for PyLadies Amsterdam talk on December 22, 2020.
 
-Note that the `Project Organization` below is provided as an example, so many directories are empty.
+Talk slides can be found [here](https://drive.google.com/file/d/1t9qEUbi1l8jOwsToAh61SvKIhIkawA5w/view?usp=sharing).
 
 Project Organization
 ------------
