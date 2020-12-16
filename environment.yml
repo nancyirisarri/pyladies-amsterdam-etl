@@ -5,13 +5,17 @@ channels:
   - defaults
 
 dependencies:
-  - python=3.9
+  - python=3.6
   - NumPy
   - SciPy
   - matplotlib
   - seaborn
   - pandas
   - Sphinx
+  - requests
+  - google-api-core
+  - google-cloud-bigquery
+  - google-cloud-storage
   - pip
   - pip:
     - -rgithubrequirements.txt

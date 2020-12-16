@@ -4,20 +4,24 @@ metadata:
   name: pyladies-amsterdam-etl-config-test
   namespace: pyladies-amsterdam-etl
 data:
-  SOURCES: "source-1 source-2"
+  # TODO Rename this to maybe MODELS.
+  SOURCES: "source_1 source_2"
   # DTAP Environment
   ENVIRONMENT: "test"
+  RAW_DATA_LOCAL: "/src/data/raw"
+  RESULTS_DATA_LOCAL: "/src/data/results"
+  # TODO Decide if can use Storage for input somehow.
   # GCP project and bucket for input raw data
-  RAW_DATA_PROJECT_GCP_KEY: "/src/keys/gcp_raw_data_key.json"
+  RAW_DATA_PROJECT_GCP_KEY: "/src/keys/nimellaa-test.json"
   RAW_DATA_PROJECT_GCP: "nimellaa-test"
   RAW_DATA_BUCKET_GCP: "pyladies-amsterdam-etl-data-test"
   # GCP project and bucket to upload log files
-  LOG_FILES_PROJECT_GCP_KEY: "/src/keys/gcp_storage_key.json"
+  LOG_FILES_PROJECT_GCP_KEY: "/src/keys/nimellaa-test.json"
   LOG_FILES_PROJECT_GCP: "nimellaa-test"
-  LOG_FILES_BUCKET: "pyladies-amsterdam-etl-logs-test"
+  LOG_FILES_BUCKET: "{}-logs-test"
   LOG_FILES_PATH: "/src/logs"
   # GCP project for this repository
-  GOOGLE_CLOUD_PROJECT_KEY: "/src/keys/gcp_bigquery_key.json"
+  GOOGLE_CLOUD_PROJECT_KEY: "/src/keys/nimellaa-test.json"
   GOOGLE_CLOUD_PROJECT: "nimellaa-test"
   # Client specific settings
   SCRIPTS_DIR: "/src/models"
@@ -25,11 +29,11 @@ data:
   SCRIPTS: "{}_SCRIPTS"
   # Source 1 Settings
   # Source 2 BigQuery dataset name
-  SOURCE-1_DATASET_BIG_QUERY: "source_1"
+  SOURCE_1_DATASET_BIG_QUERY: "source_1"
   # List of files to process
-  SOURCE-1_SCRIPTS: "source1"
+  SOURCE_1_SCRIPTS: "source1"
   # Source 2 Settings
   # Source 2 BigQuery dataset name
-  SOURCE-2_DATASET_BIG_QUERY: "source_2"
+  SOURCE_2_DATASET_BIG_QUERY: "source_2"
   # List of files to process
-  SOURCE-2_SCRIPTS: "source2a source2b"
+  SOURCE_2_SCRIPTS: "source2"
