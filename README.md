@@ -54,7 +54,7 @@ Project Organization
 
 ## Getting started
 
-You local Python environment should be up and running with a Conda environment:
+Your local Python environment should be up and running with a Conda environment:
 ```shell script
 conda env create -f environment.yml
 ```
@@ -151,12 +151,13 @@ Google Cloud Platform project. There should be a dataset _source_1_ and table _s
     ```
    
 5. Create an alert:
-    1. In the Google Cloud Platform console, go to _Logging_ and then _Logs-based Metrics_. Create a metric for the following query:
+    1. In the Google Cloud Platform console, go to _Logging_ and then _Logs-based Metrics_. Create a metric for the following 
+    query, replacing _PROJECT_NAME_ and _CLUSTER_NAME_ to your values:
     ```shell script
     resource.type="k8s_container"
-    resource.labels.project_id=PROJECT_NAME
+    resource.labels.project_id="PROJECT_NAME"
     resource.labels.location="europe-west4-a"
-    resource.labels.cluster_name=CLUSTER_NAME
+    resource.labels.cluster_name="CLUSTER_NAME"
     resource.labels.namespace_name="pyladies-amsterdam-etl"
     resource.labels.pod_name:"pyladies-amsterdam-etl-test-manual-wfdjm-"
     textPayload:"CRITICAL"
