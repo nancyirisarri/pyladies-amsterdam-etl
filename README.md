@@ -6,7 +6,7 @@ Repository for PyLadies Amsterdam talk on December 22, 2020.
 This repository follows the [Cookiecutter Data Science](https://github.com/BigDataRepublic/cookiecutter-data-science) 
 repository structure.
 
-Talk slides can be found [here](https://drive.google.com/file/d/1t9qEUbi1l8jOwsToAh61SvKIhIkawA5w/view?usp=sharing).
+Talk slides can be found [here](https://drive.google.com/file/d/1vnCyq5y_vQLuJ3A5D99D4caTzQmSeS4Y/view?usp=sharing).
 
 Project Organization
 ------------
