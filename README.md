@@ -6,51 +6,78 @@ Repository for PyLadies Amsterdam talk on December 22, 2020.
 This repository follows the [Cookiecutter Data Science](https://github.com/BigDataRepublic/cookiecutter-data-science) 
 repository structure.
 
-Talk slides can be found [here](https://drive.google.com/file/d/1vnCyq5y_vQLuJ3A5D99D4caTzQmSeS4Y/view?usp=sharing).
+The talk slides can be found [here](https://drive.google.com/file/d/1vnCyq5y_vQLuJ3A5D99D4caTzQmSeS4Y/view?usp=sharing).
+
+## tl;dr
+* The script `pyladiesamsterdametl/data/extract.py` indicates which data sources to download, which are in turn needed 
+by the R scripts.
+    * The code downloads data from the [COVID-19 dataset - RIVM Data Catalogus](https://data.rivm.nl/covid-19/).
+* The script `pyladiesamsterdametl/data/transform.py` executes the R scripts 
+under `pyladiesamsterdametl/models` on the data.
+    * For example, a script `pyladiesamsterdametl/models/source_1/source1.R` performs operations on the data
+    and writes an output data frame to _source1.csv_.
+    * To illustrate Cloud Monitoring, the script `pyladiesamsterdametl/models/source_2/source2.R` throws an error. See
+    the section _Running in Kubernetes Engine, step 5_ to set up email alerts for errrors.
+* The output CSV files are uploaded to Google BigQuery. The dataset name can be changed, but the table name will be
+the same as the R script file name.
+    * For example, for a script `pyladiesamsterdametl/models/source_1/source1.R` as a dataset and table 
+    `source_1.source1`.
+* The data in Google BigQuery tables can be used further.
+    * For example, to make a dashboard of [Daily Updates of Total Hospital Admissions of COVID-19 Patients by Province](https://datastudio.google.com/s/s0uOTLi4KEA).   
+* The application is deployed to Google Kubernetes Engine as a CronJob that runs daily. The configuration files under
+`k8s-deploy/` indicate which sources and R scripts should be executed, as well as the Google Cloud Platform project
+to use and the Google BigQuery dataset to write the output to.
 
 Project Organization
 ------------
 
-    ├── README.md          <- The top-level README for developers using this project.
+    ├── README.md                   <- The top-level README for developers using this project.
     ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
+    │   ├── external                <- Data from third party sources.
+    │   ├── interim                 <- Intermediate data that has been transformed.
+    │   ├── processed               <- The final, canonical data sets for modeling.
+    │   └── raw                     <- The original, immutable data dump.
     │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+    ├── docs                        <- A default Sphinx project; see sphinx-doc.org for details
     │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
+    ├── models                      <- Trained and serialized models, model predictions, or model summaries
     │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
+    ├── notebooks                   <- Jupyter notebooks. Naming convention is a number (for ordering),
+    │                               the creator's initials, and a short `-` delimited description, e.g.
+    │                               `1.0-jqp-initial-data-exploration`.
     │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+    ├── references                  <- Data dictionaries, manuals, and all other explanatory materials.
     │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
+    ├── reports                     <- Generated analysis as HTML, PDF, LaTeX, etc.
+    │   └── figures                 <- Generated graphics and figures to be used in reporting
     │
-    ├── environment.yml    <- The conda environment file to reproduce the analysis environment. eg.
-    │                         `conda env create -f environment.yml`
+    ├── environment.yml             <- The conda environment file to reproduce the analysis environment. eg.
+    │                               `conda env create -f environment.yml`
     │
-    ├── githubrequirements.txt <- Pip references to github repo's, referred to by `environment.yml`
+    ├── githubrequirements.txt      <- Pip references to github repo's, referred to by `environment.yml`
     │
-    └── pyladies.amsterdam.etl                <- Source code for use in this project.
-        ├── __init__.py    <- Makes pyladies.amsterdam.etl a Python module
+    └── pyladiesamsterdametl        <- Source code for use in this project.
+        ├── __init__.py             <- Makes pyladiesamsterdametl a Python module
         │
-        ├── data           <- Scripts to download or generate data
+        ├── main.py                 <- Runs the ETL pipeline
+        │
+        ├── data                    <- Scripts to download or generate data
         │   |   extract.py
         │   |   load.py
         │   └── transform.py
         │
-        ├── logs           <- Scripts to handle logs
+        ├── features                <- Scripts to turn raw data into features for modeling
+        │
+        ├── logs                    <- Scripts to handle logs
         │   └── logs.py
         │
-        ├── models         <- Scripts to train models and then use trained models to make
-        │                     predictions
+        ├── models                  <- Scripts to make calculations, train models, make predictions
+        |   ├── source_1
+        |   |      └── source1.R    <- Aggregate hospital admissions by province.
+        │   └── source_2
+        |           └── source2.R   <- Throws an error.
         │
-        └── visualization  <- Scripts to create exploratory and results oriented visualizations
+        └── visualization           <- Scripts to create exploratory and results oriented visualizations
 
 
 --------
