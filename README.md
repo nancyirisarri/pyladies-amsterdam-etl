@@ -189,8 +189,7 @@ Google Cloud Platform project. There should be a dataset _source_1_ and table _s
     resource.labels.location="europe-west4-a"
     resource.labels.cluster_name="CLUSTER_NAME"
     resource.labels.namespace_name="pyladies-amsterdam-etl"
-    resource.labels.pod_name:"pyladies-amsterdam-etl-test-manual-wfdjm-"
-    textPayload:"CRITICAL"
+    textPayload:"CRITICAL"      
     ```
     2. Find the newly-created Metric and click on _Create alert for metric_. The default values of 
     **Aggregator** as _sum_, **Period** of _10 minutes_, and the **Configuration** can be left as is.
